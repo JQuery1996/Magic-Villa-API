@@ -9,6 +9,7 @@ namespace Learning.CoreApi.Controllers {
     //[ApiController]
     public class VillaApiController : ControllerBase {
         private readonly ILogger<VillaApiController> _logger;
+        //private readonly ILogging _logger;
         public VillaApiController(ILogger<VillaApiController> _logger) {
             this._logger = _logger;
         }
