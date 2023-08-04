@@ -1,3 +1,6 @@
+using Learning.CoreApi.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -9,10 +12,14 @@ var builder = WebApplication.CreateBuilder(args);
 //builder.Host.UseSerilog();
 // Add services to the container.
 
-
+// add dbContext to the container 
+builder.Services.AddDbContext<ApplicationDbContext>(option => {
+    option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSqlConnection"));
+});
 builder.Services.AddControllers(option => {
     option.ReturnHttpNotAcceptable = true;
 }).AddNewtonsoftJson().AddXmlDataContractSerializerFormatters();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
